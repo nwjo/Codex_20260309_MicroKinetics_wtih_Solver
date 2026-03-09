@@ -142,7 +142,6 @@ enum {
 
 // Washcoat Factor
 #define Wash_F 70.0
-#define Wash_F_Surf 1.0
 
 /* Thiele Constants */
 #define D_EFF_FIXED (3.40776e-7)
@@ -1063,7 +1062,7 @@ DEFINE_SR_RATE(chatterjee_pt_ads_des_flat, f, fthread, r, mw, yi, rr)
         const real Cv_ads = 1.0;              /* term_pt * term_pt */
         const real rate_base = k_sr * C_C3H5 * pow(C_O, 5.0) * Cv_ads;
 
-        *rr = rate_base * Wash_F_Surf;
+        *rr = rate_base * Wash_F;
         // CHECK
     }
     else if (STREQ(r->name, "reaction-16")) {
@@ -1077,7 +1076,7 @@ DEFINE_SR_RATE(chatterjee_pt_ads_des_flat, f, fthread, r, mw, yi, rr)
 
         const real rate_base = k_sr * C_C3H6;
 
-        *rr = rate_base * Wash_F_Surf;
+        *rr = rate_base * Wash_F;
         // CHECK
     }
     else if (STREQ(r->name, "reaction-17")) {
@@ -1092,7 +1091,7 @@ DEFINE_SR_RATE(chatterjee_pt_ads_des_flat, f, fthread, r, mw, yi, rr)
 
         const real rate_base = k_sr * C_CC2H5 * C_H;
 
-        *rr = rate_base * Wash_F_Surf;
+        *rr = rate_base * Wash_F;
         // CHECK
     }
     else if (STREQ(r->name, "reaction-18")) {
@@ -1110,7 +1109,7 @@ DEFINE_SR_RATE(chatterjee_pt_ads_des_flat, f, fthread, r, mw, yi, rr)
 
         const real rate_base = k_sr * C_CC2H5 * C_vac;
 
-        *rr = rate_base * Wash_F_Surf;
+        *rr = rate_base * Wash_F;
         // CHECK
     }
     else if (STREQ(r->name, "reaction-19")) {
@@ -1125,7 +1124,7 @@ DEFINE_SR_RATE(chatterjee_pt_ads_des_flat, f, fthread, r, mw, yi, rr)
 
         const real rate_base = k_sr * C_C2H3 * C_CH2;
 
-        *rr = rate_base * Wash_F_Surf;
+        *rr = rate_base * Wash_F;
         // CHECK
     }
     else if (STREQ(r->name, "reaction-20")) {
@@ -1140,7 +1139,7 @@ DEFINE_SR_RATE(chatterjee_pt_ads_des_flat, f, fthread, r, mw, yi, rr)
 
         const real rate_base = k_sr * C_C2H3 * C_vac;
 
-        *rr = rate_base * Wash_F_Surf;
+        *rr = rate_base * Wash_F;
         // CHECK
     }
     else if (STREQ(r->name, "reaction-21")) {
@@ -1155,7 +1154,7 @@ DEFINE_SR_RATE(chatterjee_pt_ads_des_flat, f, fthread, r, mw, yi, rr)
 
         const real rate_base = k_sr * C_CH3 * C_C;
 
-        *rr = rate_base * Wash_F_Surf;
+        *rr = rate_base * Wash_F;
         // CHECK
     }
     else if (STREQ(r->name, "reaction-22")) {
@@ -1170,7 +1169,7 @@ DEFINE_SR_RATE(chatterjee_pt_ads_des_flat, f, fthread, r, mw, yi, rr)
 
         const real rate_base = k_sr * C_CH3 * C_vac;
 
-        *rr = rate_base * Wash_F_Surf;
+        *rr = rate_base * Wash_F;
         // CHECK
     }
     else if (STREQ(r->name, "reaction-23")) {
@@ -1185,7 +1184,7 @@ DEFINE_SR_RATE(chatterjee_pt_ads_des_flat, f, fthread, r, mw, yi, rr)
 
         const real rate_base = k_sr * C_CH2 * C_H;
 
-        *rr = rate_base * Wash_F_Surf;
+        *rr = rate_base * Wash_F;
         // CHECK
     }
     else if (STREQ(r->name, "reaction-24")) {
@@ -1200,7 +1199,7 @@ DEFINE_SR_RATE(chatterjee_pt_ads_des_flat, f, fthread, r, mw, yi, rr)
 
         const real rate_base = k_sr * C_CH2 * C_vac;
 
-        *rr = rate_base * Wash_F_Surf;
+        *rr = rate_base * Wash_F;
         // CHECK
     }
     else if (STREQ(r->name, "reaction-25")) {
@@ -1215,7 +1214,7 @@ DEFINE_SR_RATE(chatterjee_pt_ads_des_flat, f, fthread, r, mw, yi, rr)
 
         const real rate_base = k_sr * C_CH * C_H;
 
-        *rr = rate_base * Wash_F_Surf;
+        *rr = rate_base * Wash_F;
         // CHECK
     }
     else if (STREQ(r->name, "reaction-26")) {
@@ -1230,7 +1229,7 @@ DEFINE_SR_RATE(chatterjee_pt_ads_des_flat, f, fthread, r, mw, yi, rr)
 
         const real rate_base = k_sr * C_CH * C_vac;
 
-        *rr = rate_base * Wash_F_Surf;
+        *rr = rate_base * Wash_F;
         // CHECK
     }
     else if (STREQ(r->name, "reaction-27")) {
@@ -1245,7 +1244,7 @@ DEFINE_SR_RATE(chatterjee_pt_ads_des_flat, f, fthread, r, mw, yi, rr)
 
         const real rate_base = k_sr * C_C * C_H;
 
-        *rr = rate_base * Wash_F_Surf;
+        *rr = rate_base * Wash_F;
         // CHECK
     }
     else if (STREQ(r->name, "reaction-28")) {
@@ -1260,7 +1259,7 @@ DEFINE_SR_RATE(chatterjee_pt_ads_des_flat, f, fthread, r, mw, yi, rr)
 
         const real rate_base = k_sr * C_C2H3 * C_O;
 
-        *rr = rate_base * Wash_F_Surf;
+        *rr = rate_base * Wash_F;
         // CHECK
     }
     else if (STREQ(r->name, "reaction-29")) {
@@ -1275,7 +1274,7 @@ DEFINE_SR_RATE(chatterjee_pt_ads_des_flat, f, fthread, r, mw, yi, rr)
 
         const real rate_base = k_sr * C_CH3CO * C_vac;
 
-        *rr = rate_base * Wash_F_Surf;
+        *rr = rate_base * Wash_F;
         // CHECK
     }
     else if (STREQ(r->name, "reaction-30")) {
@@ -1290,7 +1289,7 @@ DEFINE_SR_RATE(chatterjee_pt_ads_des_flat, f, fthread, r, mw, yi, rr)
 
         const real rate_base = k_sr * C_CH3 * C_CO;
 
-        *rr = rate_base * Wash_F_Surf;
+        *rr = rate_base * Wash_F;
         // CHECK
     }
     else if (STREQ(r->name, "reaction-31")) {
@@ -1305,7 +1304,7 @@ DEFINE_SR_RATE(chatterjee_pt_ads_des_flat, f, fthread, r, mw, yi, rr)
 
         const real rate_base = k_sr * C_CH3CO * C_vac;
 
-        *rr = rate_base * Wash_F_Surf;
+        *rr = rate_base * Wash_F;
         // CHECK
     }
     else if (STREQ(r->name, "reaction-32")) {
@@ -1320,7 +1319,7 @@ DEFINE_SR_RATE(chatterjee_pt_ads_des_flat, f, fthread, r, mw, yi, rr)
 
         const real rate_base = k_sr * C_CH3 * C_O;
 
-        *rr = rate_base * Wash_F_Surf;
+        *rr = rate_base * Wash_F;
         // CHECK
     }
     else if (STREQ(r->name, "reaction-33")) {
@@ -1335,7 +1334,7 @@ DEFINE_SR_RATE(chatterjee_pt_ads_des_flat, f, fthread, r, mw, yi, rr)
 
         const real rate_base = k_sr * C_CH2 * C_OH;
 
-        *rr = rate_base * Wash_F_Surf;
+        *rr = rate_base * Wash_F;
         // CHECK
     }
     else if (STREQ(r->name, "reaction-34")) {
@@ -1350,7 +1349,7 @@ DEFINE_SR_RATE(chatterjee_pt_ads_des_flat, f, fthread, r, mw, yi, rr)
 
         const real rate_base = k_sr * C_CH2 * C_O;
 
-        *rr = rate_base * Wash_F_Surf;
+        *rr = rate_base * Wash_F;
         // CHECK
     }
     else if (STREQ(r->name, "reaction-35")) {
@@ -1365,7 +1364,7 @@ DEFINE_SR_RATE(chatterjee_pt_ads_des_flat, f, fthread, r, mw, yi, rr)
 
         const real rate_base = k_sr * C_CH * C_OH;
 
-        *rr = rate_base * Wash_F_Surf;
+        *rr = rate_base * Wash_F;
         // CHECK
     }
     else if (STREQ(r->name, "reaction-36")) {
@@ -1380,7 +1379,7 @@ DEFINE_SR_RATE(chatterjee_pt_ads_des_flat, f, fthread, r, mw, yi, rr)
 
         const real rate_base = k_sr * C_CH * C_O;
 
-        *rr = rate_base * Wash_F_Surf;
+        *rr = rate_base * Wash_F;
         // CHECK
     }
     else if (STREQ(r->name, "reaction-37")) {
@@ -1395,7 +1394,7 @@ DEFINE_SR_RATE(chatterjee_pt_ads_des_flat, f, fthread, r, mw, yi, rr)
 
         const real rate_base = k_sr * C_C * C_OH;
 
-        *rr = rate_base * Wash_F_Surf;
+        *rr = rate_base * Wash_F;
         // CHECK
     }
     else if (STREQ(r->name, "reaction-38")) {
@@ -1410,7 +1409,7 @@ DEFINE_SR_RATE(chatterjee_pt_ads_des_flat, f, fthread, r, mw, yi, rr)
 
         const real rate_base = k_sr * C_O * C_H;
 
-        *rr = rate_base * Wash_F_Surf;
+        *rr = rate_base * Wash_F;
         // CHECK
     }
     else if (STREQ(r->name, "reaction-39")) {
@@ -1425,7 +1424,7 @@ DEFINE_SR_RATE(chatterjee_pt_ads_des_flat, f, fthread, r, mw, yi, rr)
 
         const real rate_base = k_sr * C_OH * C_vac;
 
-        *rr = rate_base * Wash_F_Surf;
+        *rr = rate_base * Wash_F;
         // CHECK
     }
     else if (STREQ(r->name, "reaction-40")) {
@@ -1440,7 +1439,7 @@ DEFINE_SR_RATE(chatterjee_pt_ads_des_flat, f, fthread, r, mw, yi, rr)
 
         const real rate_base = k_sr * C_H * C_OH;
 
-        *rr = rate_base * Wash_F_Surf;
+        *rr = rate_base * Wash_F;
         // CHECK
     }
     else if (STREQ(r->name, "reaction-41")) {
@@ -1455,7 +1454,7 @@ DEFINE_SR_RATE(chatterjee_pt_ads_des_flat, f, fthread, r, mw, yi, rr)
 
         const real rate_base = k_sr * C_H2O * C_vac;
 
-        *rr = rate_base * Wash_F_Surf;
+        *rr = rate_base * Wash_F;
         // CHECK
     }
     else if (STREQ(r->name, "reaction-42")) {
@@ -1469,7 +1468,7 @@ DEFINE_SR_RATE(chatterjee_pt_ads_des_flat, f, fthread, r, mw, yi, rr)
 
         const real rate_base = k_sr * C_OH * C_OH;
 
-        *rr = rate_base * Wash_F_Surf;
+        *rr = rate_base * Wash_F;
         // CHECK
     }
     else if (STREQ(r->name, "reaction-43")) {
@@ -1484,7 +1483,7 @@ DEFINE_SR_RATE(chatterjee_pt_ads_des_flat, f, fthread, r, mw, yi, rr)
 
         const real rate_base = k_sr * C_H2O * C_O;
 
-        *rr = rate_base * Wash_F_Surf;
+        *rr = rate_base * Wash_F;
         // CHECK
     }
     else if (STREQ(r->name, "reaction-44")) {
@@ -1499,7 +1498,7 @@ DEFINE_SR_RATE(chatterjee_pt_ads_des_flat, f, fthread, r, mw, yi, rr)
 
         const real rate_base = k_sr * C_CO * C_O;
 
-        *rr = rate_base * Wash_F_Surf;
+        *rr = rate_base * Wash_F;
         // CHECK
     }
     else if (STREQ(r->name, "reaction-45")) {
@@ -1514,7 +1513,7 @@ DEFINE_SR_RATE(chatterjee_pt_ads_des_flat, f, fthread, r, mw, yi, rr)
 
         const real rate_base = k_sr * C_CO2 * C_vac;
 
-        *rr = rate_base * Wash_F_Surf;
+        *rr = rate_base * Wash_F;
         // CHECK
     }
     else if (STREQ(r->name, "reaction-46")) {
@@ -1529,7 +1528,7 @@ DEFINE_SR_RATE(chatterjee_pt_ads_des_flat, f, fthread, r, mw, yi, rr)
 
         const real rate_base = k_sr * C_C * C_O;
 
-        *rr = rate_base * Wash_F_Surf;
+        *rr = rate_base * Wash_F;
         // CHECK
     }
     else if (STREQ(r->name, "reaction-47")) {
@@ -1544,7 +1543,7 @@ DEFINE_SR_RATE(chatterjee_pt_ads_des_flat, f, fthread, r, mw, yi, rr)
 
         const real rate_base = k_sr * C_CO * C_vac;
 
-        *rr = rate_base * Wash_F_Surf;
+        *rr = rate_base * Wash_F;
         // CHECK
     }
     else if (STREQ(r->name, "reaction-51")) {
@@ -1559,7 +1558,7 @@ DEFINE_SR_RATE(chatterjee_pt_ads_des_flat, f, fthread, r, mw, yi, rr)
 
         const real rate_base = k_sr * C_NO * C_vac;
 
-        *rr = rate_base * Wash_F_Surf;
+        *rr = rate_base * Wash_F;
         // CHECK
     }
     else if (STREQ(r->name, "reaction-52")) {
@@ -1574,7 +1573,7 @@ DEFINE_SR_RATE(chatterjee_pt_ads_des_flat, f, fthread, r, mw, yi, rr)
 
         const real rate_base = k_sr * C_N * C_O;
 
-        *rr = rate_base * Wash_F_Surf;
+        *rr = rate_base * Wash_F;
         // CHECK
     }
     else if (STREQ(r->name, "reaction-60")) {
@@ -1588,7 +1587,7 @@ DEFINE_SR_RATE(chatterjee_pt_ads_des_flat, f, fthread, r, mw, yi, rr)
 
         const real rate_base = k_sr * C_CO_rh * C_O_rh;
 
-        *rr = rate_base * Wash_F_Surf;
+        *rr = rate_base * Wash_F;
         // CHECK
     }
     else if (STREQ(r->name, "reaction-61")) {
@@ -1602,7 +1601,7 @@ DEFINE_SR_RATE(chatterjee_pt_ads_des_flat, f, fthread, r, mw, yi, rr)
 
         const real rate_base = k_sr * C_NO_rh * C_vac_rh;
 
-        *rr = rate_base * Wash_F_Surf;
+        *rr = rate_base * Wash_F;
         // CHECK
     }
 }
