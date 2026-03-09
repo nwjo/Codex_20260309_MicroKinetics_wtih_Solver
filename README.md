@@ -1,0 +1,2 @@
+# Codex_20260309_MicroKinetics_wtih_Solver
+Microkinetics Modeling with implemented implicit chemical solver
