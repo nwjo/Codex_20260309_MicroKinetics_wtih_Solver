@@ -20,6 +20,8 @@ Files:
 - `stiff_solver.h/.c`: solver interface and backward-Euler/Euler placeholder backend.
 - `chemistry_cache.h/.c`: Fluent UDM cache read/write helpers.
 - `fluent_hooks.c`: `DEFINE_INIT`, `DEFINE_ADJUST`, compatibility `DEFINE_SR_RATE` wrapper.
+- `legacy61_bridge.h/.c`: migration bridge evaluating `reaction-1..reaction-61` through an internalized chemistry module and caching them.
+- `chem_internalized_61rxn.c`: internalized copy of all 61 reaction equations/rate coefficients (no runtime dependency on repository legacy file).
 
 ## 3) Data flow
 1. `DEFINE_INIT`: allocates initial chemistry state in UDM slots.
@@ -40,6 +42,19 @@ No integration is performed in return hooks.
 - Added explicit site-balance projection/clipping policy.
 - Added named compile-time behavior flags for migration transparency.
 
+
+- `CHEM_USE_LEGACY_61_RATE_BRIDGE` (default ON): imports all 61 reaction-rate formulas through the validated legacy dispatcher once per face update in `DEFINE_ADJUST`, then caches them for return hooks.
+
 ## Notes
-- Current code is structured for full mechanism porting from legacy branch formulas into `chem_compute_intrinsic_rates()` and stoichiometric RHS assembly in `chem_build_rhs()`.
+- All 61 reactions are now reflected in the new flow through the legacy-bridge path (`CHEM_USE_LEGACY_61_RATE_BRIDGE=1`) during migration hardening. Native table-based intrinsic-rate porting remains available via `chem_compute_intrinsic_rates()` when the bridge is disabled.
 - Solver API is finalized for future semi-implicit extrapolation upgrade; current backend is a robust minimal integrator scaffold.
+
+## Homogeneous gas-phase option (DEFINE_NET_REACTION_RATE)
+- Added `net_reaction_rate_udf.c` implementing `DEFINE_NET_REACTION_RATE(homogeneous_net_rates, ...)`.
+- This path computes species net molar rates (`rr[]`) and Jacobian (`jac[]`) directly from `pressure[0]`, `temp[0]`, and `yi[]`.
+- If your workflow returns source terms from net gas-phase reaction rates via `DEFINE_SOURCE`, a `DEFINE_SR_RATE` hook is not required (it may remain only as reference/compatibility).
+
+
+## 61 reactions reflection policy
+- In bridge mode (`CHEM_USE_LEGACY_61_RATE_BRIDGE=1`), all 61 reaction rates are evaluated by calling the internalized dispatcher (`chatterjee_pt_ads_des_flat_internalized`) for `reaction-1` to `reaction-61` each chemistry update.
+- Therefore all equations and kinetic coefficients already internalized in `udf/chem_internalized_61rxn.c` are reflected directly in cached migrated rates.
