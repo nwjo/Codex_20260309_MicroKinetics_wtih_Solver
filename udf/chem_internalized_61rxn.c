@@ -748,7 +748,7 @@ static inline void log_ads_rate_once(int r_id_num, const char* r_short_name,
 /* ======================================================================= */
 /* Main UDF                                                                */
 /* ======================================================================= */
-DEFINE_SR_RATE(chatterjee_pt_ads_des_flat_internalized, f, fthread, r, mw, yi, rr)
+void chatterjee_pt_ads_des_flat_internalized(face_t f, Thread *fthread, Reaction *r, real *mw, real *yi, real *rr)
 {
     cell_t  c0  = F_C0(f, fthread);
     Thread *t0  = THREAD_T0(fthread);

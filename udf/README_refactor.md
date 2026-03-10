@@ -26,9 +26,9 @@ Files:
 ## 3) Data flow
 1. `DEFINE_INIT`: allocates initial chemistry state in UDM slots.
 2. `DEFINE_ADJUST`: wall-face loop -> fetch local gas/wall state -> load cached chemistry -> integrate surface state ODE -> compute intrinsic rates -> apply eta/washcoat in export layer -> write cache.
-3. `DEFINE_SR_RATE` compatibility hook (`chatterjee_cached_rates`): maps `reaction-N` to cached exported rate only.
+3. `DEFINE_NET_REACTION_RATE` and/or `DEFINE_SOURCE` hooks consume cached chemistry outputs for returned rates/sources.
 
-No integration is performed in return hooks.
+`DEFINE_SR_RATE` is kept out of active hooks in this migrated path (reference-only semantics). No integration is performed in return hooks.
 
 ## 4) Washcoat scaling policy (mandatory behavior)
 - Intrinsic elementary rates: no washcoat factor.
@@ -50,6 +50,7 @@ No integration is performed in return hooks.
 - Solver API is finalized for future semi-implicit extrapolation upgrade; current backend is a robust minimal integrator scaffold.
 
 ## Homogeneous gas-phase option (DEFINE_NET_REACTION_RATE)
+- Gas species order for net-rate UDF is explicitly fixed to 9 species: O2, C3H6, H2, H2O, CO2, CO, NO, NO2, N2 (must match Fluent material species order).
 - Added `net_reaction_rate_udf.c` implementing `DEFINE_NET_REACTION_RATE(homogeneous_net_rates, ...)`.
 - This path computes species net molar rates (`rr[]`) and Jacobian (`jac[]`) directly from `pressure[0]`, `temp[0]`, and `yi[]`.
 - If your workflow returns source terms from net gas-phase reaction rates via `DEFINE_SOURCE`, a `DEFINE_SR_RATE` hook is not required (it may remain only as reference/compatibility).
@@ -58,3 +59,9 @@ No integration is performed in return hooks.
 ## 61 reactions reflection policy
 - In bridge mode (`CHEM_USE_LEGACY_61_RATE_BRIDGE=1`), all 61 reaction rates are evaluated by calling the internalized dispatcher (`chatterjee_pt_ads_des_flat_internalized`) for `reaction-1` to `reaction-61` each chemistry update.
 - Therefore all equations and kinetic coefficients already internalized in `udf/chem_internalized_61rxn.c` are reflected directly in cached migrated rates.
+
+
+## Hooking policy
+- `DEFINE_SR_RATE` and `DEFINE_NET_REACTION_RATE` are not used together in active hook registration.
+- In this refactor, `DEFINE_SR_RATE` is not provided as an active Fluent hook and must not be hooked.
+- Runtime return path should use `DEFINE_NET_REACTION_RATE` and/or `DEFINE_SOURCE` only.

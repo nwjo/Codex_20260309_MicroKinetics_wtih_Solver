@@ -20,10 +20,15 @@
 #define NSPEC 9         /* [NSPEC] Replace with actual Fluent species count */
 
 enum {
-  SPEC_O2  = 0,
-  SPEC_CO  = 1,
-  SPEC_CO2 = 2
-  /* Add remaining species indices in Fluent order */
+  SPEC_O2 = 0,
+  SPEC_C3H6,
+  SPEC_H2,
+  SPEC_H2O,
+  SPEC_CO2,
+  SPEC_CO,
+  SPEC_NO,
+  SPEC_NO2,
+  SPEC_N2
 };
 
 /* [KINETIC_PARAMETERS] */
@@ -36,10 +41,15 @@ enum {
 static void get_mw(double mw[NSPEC])
 {
   int k;
-  for (k = 0; k < NSPEC; ++k) mw[k] = 0.028; /* placeholder default */
-  mw[SPEC_O2]  = 0.0319988;
-  mw[SPEC_CO]  = 0.02801055;
-  mw[SPEC_CO2] = 0.04400995;
+  mw[SPEC_O2]   = 0.0319988;
+  mw[SPEC_C3H6] = 0.042081;
+  mw[SPEC_H2]   = 0.00201594;
+  mw[SPEC_H2O]  = 0.01801534;
+  mw[SPEC_CO2]  = 0.04400995;
+  mw[SPEC_CO]   = 0.02801055;
+  mw[SPEC_NO]   = 0.0300061;
+  mw[SPEC_NO2]  = 0.0460055;
+  mw[SPEC_N2]   = 0.0280134;
 }
 
 /* Convert Yi -> Xi, Ctot and Ck using pressure[0], temp[0], yi[] from Fluent */
@@ -112,7 +122,7 @@ DEFINE_NET_REACTION_RATE(homogeneous_net_rates, c, t, particle, pressure, temp, 
    * rop = kf * C_O2 * C_CO
    */
   kf = A_PREEXP * exp(-E_ACT / MAX(R_UNIVERSAL * T, MIN_POS));
-  rop = kf * ck[SPEC_O2] * ck[SPEC_CO];
+  rop = kf * ck[SPEC_O2] * ck[SPEC_CO]; /* model uses O2/CO/CO2 subset; others stay net-zero */
 
   /* rr assembly:
    * rr[k] is net molar production/destruction rate of species k.
@@ -142,6 +152,7 @@ DEFINE_NET_REACTION_RATE(homogeneous_net_rates, c, t, particle, pressure, temp, 
     jac[SPEC_O2*NSPEC + j]  -= drop_dyj;
     jac[SPEC_CO*NSPEC + j]  -= drop_dyj;
     jac[SPEC_CO2*NSPEC + j] += drop_dyj;
+    /* Other species rows remain zero in this placeholder kinetic subset. */
   }
 
   /* Keep unused-loop variable warning-free across compilers configured by Fluent */

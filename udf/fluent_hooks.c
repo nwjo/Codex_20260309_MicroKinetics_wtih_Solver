@@ -76,17 +76,7 @@ DEFINE_ADJUST(chemistry_adjust, domain)
   }
 }
 
-/* Compatibility wrapper: returns cached rates only. No reintegration. */
-DEFINE_SR_RATE(chatterjee_cached_rates, f, fthread, r, mw, yi, rr)
-{
-  const cell_t c0 = F_C0(f, fthread);
-  Thread *t0 = THREAD_T0(fthread);
-  const int rid = chem_reaction_id_from_name(r->name);
-  (void)mw; (void)yi;
-
-  if (rid >= 1 && rid <= CHEM_N_REACTIONS) {
-    *rr = C_UDMI(c0, t0, UDM_RATE_EXPORT_BASE + (rid-1));
-  } else {
-    *rr = 0.0;
-  }
-}
+/*
+ * NOTE: DEFINE_SR_RATE is intentionally not provided/hooked in this migrated path.
+ * Cached chemistry is consumed via DEFINE_NET_REACTION_RATE / DEFINE_SOURCE workflows.
+ */
